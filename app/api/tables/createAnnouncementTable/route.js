@@ -1,3 +1,6 @@
+export async function POST(req, { params }) {
+    console.log("Just an api")
+}
 // // pages/api/createAnnouncementTable.js
 // import mysql from "mysql2/promise";
 

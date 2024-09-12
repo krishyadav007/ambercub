@@ -240,7 +240,7 @@ const AllPersons = () => {
               {previewUrl ? (
                 <img src={previewUrl} alt="Preview" className="mx-auto" />
               ) : (
-                <p>Drag 'n' drop some files here, or click to select files</p>
+                <p>Drag drop some files here, or click to select files</p>
               )}
             </div>
             <label className="block text-sm font-medium text-gray-700 mt-4">

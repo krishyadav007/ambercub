@@ -1,3 +1,6 @@
+export async function POST(req, { params }) {
+    console.log("Just an api")
+}
 // import mysql from "mysql2/promise";
 
 // export async function POST(req) {

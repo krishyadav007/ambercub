@@ -401,7 +401,7 @@ const AllPersons = ({ params }) => {
               {previewUrl ? (
                 <img src={previewUrl} alt="Preview" className="mx-auto" />
               ) : (
-                <p>Drag 'n' drop some files here, or click to select files</p>
+                <p>Drag n drop some files here, or click to select files</p>
               )}
             </div>
 
