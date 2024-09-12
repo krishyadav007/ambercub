@@ -1,5 +1,5 @@
 // import mysql from "mysql2/promise";
-import { db } from '../../../../../lib/db';
+import { db } from '../../../../lib/db';
 import { auth } from "@/auth"
 // import { currentUser } from "@clerk/nextjs/server";
 
