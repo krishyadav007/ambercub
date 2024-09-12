@@ -37,7 +37,8 @@
     "sweetalert2": "^11.13.3",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "zoomist": "^2.1.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
