@@ -1,0 +1,148 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  username      String?   @unique
+  profileName   String?   @unique
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?   @db.Text
+  password      String?
+  bio           String?   @db.Text
+  accounts      Account[]
+  posts         Post[]
+  likes         Like[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  followers  Follower[] @relation("UserFollowers")
+  followings Follower[] @relation("UserFollowings")
+}
+
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String? @db.Text
+  access_token             String? @db.Text
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String? @db.Text
+  session_state            String?
+  refresh_token_expires_in Int?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Ainst {
+  id            Int      @id @default(autoincrement())
+  aid           String
+  title         String?  // Nullable field
+  first_name    String
+  middle_name   String?  // Nullable field
+  last_name     String?  // Nullable field
+  party_details String?  // Nullable field
+  created_at    DateTime @default(now()) @db.Timestamp(0)
+  updated_at    DateTime @updatedAt @db.Timestamp(0)
+}
+
+model Alert {
+  id     Int     @id @default(autoincrement())
+  aid    String
+  nid    String? // Nullable field
+  userid String
+}
+model Announcement {
+  id             Int      @id @default(autoincrement())
+  nid            String   @unique
+  medium         String
+  published_on   DateTime @db.Date
+  img_path       String   @db.LongText
+  text           String   @db.LongText
+  details        String   @db.LongText
+  location       String   @db.LongText
+  lat            Decimal  @db.Decimal(10, 8)
+  lon            Decimal  @db.Decimal(10, 8)
+  added_by       String
+  last_validated DateTime? @db.Date // Nullable field
+}
+
+model Attribute {
+  id        Int    @id @default(autoincrement())
+  attribute String
+  type      String
+}
+
+model Location {
+  id       Int     @id @default(autoincrement())
+  aid      String
+  address  String  @db.LongText
+  details  String  @db.LongText
+  lat      Decimal @db.Decimal(10, 8)
+  lon      Decimal @db.Decimal(11, 8)
+  added_by String
+}
+
+model Ninst {
+  id           Int      @id @default(autoincrement())
+  nid          String
+  title        String?  // Nullable field
+  first_name   String
+  middle_name  String?  // Nullable field
+  last_name    String?  // Nullable field
+  party_details String? // Nullable field
+  created_at   DateTime @default(now()) @db.Timestamp(0)
+  updated_at   DateTime @updatedAt @db.Timestamp(0)
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  images    Image[]
+  createdAt DateTime @default(now())
+  Like      Like[]
+}
+
+model Image {
+  id       Int    @id @default(autoincrement())
+  desc     String @db.Text
+  imageUrl String
+  postId   Int
+  post     Post   @relation(fields: [postId], references: [id])
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    Int?
+}
+
+model Follower {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  follower    User     @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)
+  followerId  String
+  following   User     @relation("UserFollowings", fields: [followingId], references: [id], onDelete: Cascade)
+  followingId String
+}
