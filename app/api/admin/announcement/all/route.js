@@ -5,7 +5,6 @@ import { auth } from "@/auth"
 export async function POST(req, { params }) {
   const session = await auth();
   const EmailId = session?.user?.email;
-  console.log("Am being called")
   try {
     // Parse the request body
     const body = await req.json();
@@ -16,7 +15,7 @@ export async function POST(req, { params }) {
     //   password: process.env.NEXT_PUBLIC_PASSWORD, // DB_PASSWORD,
     //   database: process.env.NEXT_PUBLIC_DB_NAME, // DB_NAME
     // });
-    const allLocations = await db.location.findMany();
+    const allAnnouncements = await db.announcement.findMany();
     // // You can use the body to customize your query if needed
     // const AllLocationQuery = `SELECT * FROM announcement `;
     // let response_locations = await connection.query(AllLocationQuery);
@@ -24,7 +23,7 @@ export async function POST(req, { params }) {
 
     return new Response(
       JSON.stringify({
-        location: allLocations,
+        location: allAnnouncements,
       }),
       {
         status: 200,

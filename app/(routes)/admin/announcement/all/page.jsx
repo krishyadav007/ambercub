@@ -7,13 +7,13 @@ import Swal from "sweetalert2";
 const AllAnnouncements = () => {
   const { data: session, status } = useSession();
   const EmailId = session?.user?.email;
-  const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+  const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(";");
 
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (EmailId) {
-      setIsAdmin(EmailId === ADMIN_EMAIL);
+      setIsAdmin(EmailId.includes(ADMIN_EMAIL));
     }
   }, []);
 
