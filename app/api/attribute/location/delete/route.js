@@ -6,7 +6,6 @@ export async function DELETE(request) {
     const result = await db.attribute.deleteMany({
       where: {
         attribute: attribute,
-        type: "location"
       }
     });
     // const connection = await mysql.createConnection({

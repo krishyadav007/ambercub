@@ -14,7 +14,6 @@ export async function PUT(request) {
     const result = await db.attribute.updateMany({
       where: {
         attribute: originalAttribute,
-        type: "location"
       },
       data: {
         attribute: attribute

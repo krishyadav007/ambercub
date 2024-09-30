@@ -14,11 +14,7 @@ export async function POST(request) {
     // const [attributes] = await connection.query(AllAttributeQuery);
     // await connection.end();
 
-    const attributes = await db.attribute.findMany({
-      where: {
-        type: "location"
-      }
-    });
+    const attributes = await db.attribute.findMany();
 
     return new Response(
       JSON.stringify({

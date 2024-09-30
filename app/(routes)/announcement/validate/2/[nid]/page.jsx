@@ -93,7 +93,7 @@ const AddressPage = ({ params }) => {
             <h2 className="text-2xl mb-6">(Address)</h2>
             {/* <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
-                Mediumm
+                Published medium
               </label>
               <input
                 type="text"
@@ -148,7 +148,7 @@ const AddressPage = ({ params }) => {
               >
                 {/* <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700">
-                    Medium
+                    Published medium
                   </label>
                   <input
                     type="text"

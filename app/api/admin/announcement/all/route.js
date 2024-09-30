@@ -5,6 +5,21 @@ import { auth } from "@/auth"
 export async function POST(req, { params }) {
   const session = await auth();
   const EmailId = session?.user?.email;
+  const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(";");
+  console.log(ADMIN_EMAIL,EmailId)
+  if (!ADMIN_EMAIL.includes(EmailId)) {
+    return new Response(
+      JSON.stringify({
+        "Permission":"Denied"
+      }),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+  }
   try {
     // Parse the request body
     const body = await req.json();

@@ -350,7 +350,7 @@ const AllPersons = ({ params }) => {
             </h2>
 
             <label className="block text-sm font-medium text-gray-700">
-              Medium
+            Published medium
             </label>
             <input
               type="text"
@@ -412,6 +412,7 @@ const AllPersons = ({ params }) => {
               name="text"
               value={announcement.text}
               onChange={handleChangeAnnouncement}
+              rows="4"
               className="w-full px-4 py-2 mt-1 border-b border-gray-300 focus:border-gray-400 focus:ring-0 outline-none"
             ></textarea>
           </div>

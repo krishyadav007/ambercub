@@ -9,11 +9,7 @@ export async function POST(request) {
     //   password: process.env.NEXT_PUBLIC_PASSWORD, // DB_PASSWORD,
     //   database: process.env.NEXT_PUBLIC_DB_NAME, // DB_NAME
     // });
-    const attributes = await db.attribute.findMany({
-      where: {
-        type: "announcement"
-      }
-    });
+    const attributes = await db.attribute.findMany({});
     // const AllAttributeQuery = `SELECT * FROM attribute WHERE type = "announcement"`;
     // const [attributes] = await connection.query(AllAttributeQuery);
     // await connection.end();

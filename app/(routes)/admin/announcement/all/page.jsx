@@ -10,10 +10,10 @@ const AllAnnouncements = () => {
   const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(";");
 
   const [isAdmin, setIsAdmin] = useState(false);
-
+  console.log(EmailId,ADMIN_EMAIL);
   useEffect(() => {
     if (EmailId) {
-      setIsAdmin(EmailId.includes(ADMIN_EMAIL));
+      setIsAdmin(ADMIN_EMAIL.includes(EmailId));
     }
   }, []);
 
@@ -98,7 +98,7 @@ const AllAnnouncements = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 ">
-                      Medium
+                      Published medium
                     </label>
                     <input
                       type="text"

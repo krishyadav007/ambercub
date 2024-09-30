@@ -115,12 +115,13 @@ const AllPersons = ({ params }) => {
               <div className="w-full md:w-1/2">
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700">
-                    Medium
+                  Published medium
                   </label>
                   <textarea
                     name="text"
                     value={announcement.medium || ""}
                     readOnly={viewOnly}
+                    rows="4"
                     className={`w-full px-4 font-light py-2 mt-1 border-b border-gray-300 focus:border-gray-400 focus:ring-0 outline-none ${viewOnly ? "disabled cursor-not-allowed border-gray-300" : ""}`}
                   ></textarea>
                 </div>

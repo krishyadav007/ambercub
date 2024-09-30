@@ -4,17 +4,16 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function CreateTablesPage() {
-    // const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
-    // const { user } = useUser();
+    const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(";");
+    const { data: session, status } = useSession();
+    const EmailId = session?.user?.email;    
     const [isAdmin, setIsAdmin] = useState(true);
 
-    // useEffect(() => {
-    // //     if (user && user.primaryEmailAddress) {
-    //         setIsAdmin(user.primaryEmailAddress.emailAddress === ADMIN_EMAIL);
-    // //     }
-    // });
-    const { data: session } = useSession();
-    const userId = session?.user?.id;
+    useEffect(() => {
+        if (EmailId) {
+          setIsAdmin(ADMIN_EMAIL.includes(EmailId));
+        }
+    }, []);
 
     const [tables, setTables] = useState([
         { name: "Announcement", exists: false },
@@ -82,6 +81,20 @@ export default function CreateTablesPage() {
     return (
         <>
             <div className="container mx-auto p-4">
+            <div className="flex justify-center mt-8 space-x-4">
+                <Link
+                    href="/location/attribute"
+                    className="flex items-center justify-center text-sm font-medium bg-blue-500 text-white px-6 py-3  hover:bg-blue-600 transition duration-300"
+                >
+                    Attributes
+                </Link>
+                {/* <Link
+                    href="/announcement/attribute"
+                    className="flex items-center justify-center text-sm font-medium bg-blue-500 text-white px-6 py-3  hover:bg-blue-600 transition duration-300"
+                >
+                    Announcement Attribute
+                </Link> */}
+            </div>
                 <h1 className="text-2xl font-bold mb-4">Manage Tables</h1>
                 <table className="min-w-full bg-white border border-gray-300">
                     <thead>
@@ -114,20 +127,6 @@ export default function CreateTablesPage() {
                         ))}
                     </tbody>
                 </table>
-            </div>
-            <div className="flex justify-center mt-8 space-x-4">
-                <Link
-                    href="/location/attribute"
-                    className="flex items-center justify-center text-sm font-medium bg-blue-500 text-white px-6 py-3  hover:bg-blue-600 transition duration-300"
-                >
-                    Location Attribute
-                </Link>
-                <Link
-                    href="/announcement/attribute"
-                    className="flex items-center justify-center text-sm font-medium bg-blue-500 text-white px-6 py-3  hover:bg-blue-600 transition duration-300"
-                >
-                    Announcement Attribute
-                </Link>
             </div>
         </>
     );

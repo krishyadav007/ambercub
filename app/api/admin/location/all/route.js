@@ -1,9 +1,24 @@
 // Read
-// import mysql from "mysql2/promise";
 import { db } from '../../../../../lib/db';
 import { auth } from "@/auth"
 
 export async function POST(req, { params }) {
+  const session = await auth();
+  const EmailId = session?.user?.email;
+  const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(";");
+  if (!ADMIN_EMAIL.includes(EmailId)) {
+    return new Response(
+      JSON.stringify({
+        "Permission":"Denied"
+      }),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+  }
   try {
     // const connection = await mysql.createConnection({
     //   host: process.env.NEXT_PUBLIC_HOST, //DB_HOST,

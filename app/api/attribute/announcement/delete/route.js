@@ -15,7 +15,6 @@ export async function DELETE(request) {
       const result = await db.attribute.deleteMany({
         where: {
           attribute: attribute,  // Replace with the variable or value you want to match
-          type: "announcement"
         }
       });    
     // await connection.query(DeleteQuery, [attribute]);
