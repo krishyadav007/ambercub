@@ -23,7 +23,7 @@ export async function DELETE(req, { params }) {
     // await connection.end();
 
     return new Response(
-      JSON.stringify({ message: "Announcement deleted successfully" }),
+      JSON.stringify({ message: "Notice deleted successfully" }),
       {
         status: 200,
         headers: {
@@ -32,9 +32,9 @@ export async function DELETE(req, { params }) {
       },
     );
   } catch (error) {
-    console.error("Error deleting Announcement:", error);
+    console.error("Error deleting Notice:", error);
     return new Response(
-      JSON.stringify({ message: "Error deleting Announcement" }),
+      JSON.stringify({ message: "Error deleting Notice" }),
       {
         status: 500,
         headers: {

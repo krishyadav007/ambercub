@@ -83,7 +83,7 @@ const AllAnnouncements = () => {
               href={`/announcement/create`}
               className="block text-lg font-medium bg-cream-3 text-black px-4 py-2 hover:bg-[#f3efe9] text-center w-full sm:w-auto"
             >
-              Add Announcement
+              Add notices
             </Link>
           </div>
           {announcements.length > 0 ? (
@@ -165,7 +165,7 @@ const AllAnnouncements = () => {
               </div>
             ))
           ) : (
-            <div>No announcements found.</div>
+            <div>No notices found.</div>
           )}
         </div>
       </div>

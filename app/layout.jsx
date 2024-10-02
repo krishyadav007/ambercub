@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
   return (
       <SessionProvider>
       <html lang="en">
-        <body>
+        <body className="bg-cream-1">
           <Navbar />
           {loading ? <LoaderSkeleton /> : children}
         </body>

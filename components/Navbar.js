@@ -1,17 +1,33 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-// import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  useEffect(() => {
+      console.log("Session status:", status);
+      console.log("Session data:", session);
+  }, [session, status]);
+
+  const handleSignIn = () => {
+      router.push("/signin");
+  };
+  const handleSignOut = async () => {
+    await signOut({ redirect: false });
+    // router.push("/signin");
+};
 
   return (
     <nav className="bg-[#f3efe5] p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/">
           <span className="text-2xl text-gray-800 cursor-pointer">
-            AmberCub
+            Noticeboy
           </span>
         </Link>
         <div className="hidden sm:flex space-x-4 items-center">
@@ -25,11 +41,42 @@ export default function Navbar() {
             href="/announcement/all"
             className="text-gray-800 hover:text-black"
           >
-            Announcement
+            Notices
           </Link>
           <Link href="/alerts/all" className="text-gray-800 hover:text-black">
             Alert
           </Link>
+          <div className="flex items-center space-x-4">
+                {status === "loading" ? (
+                    <p></p>
+                ) : status === "authenticated" ? (
+                    <>
+                        <p className="text-gray-800 hover:text-black" >Welcome, {session.user.name || session.user.email}</p>
+                        <button
+                            onClick={handleSignOut}
+                            className="bg-cream-3 px-4 py-2"
+                        >
+                            Sign Out
+                        </button>
+                    </>
+                ) : (
+                    <button
+                        onClick={handleSignIn}
+                        className="bg-cream-3 px-4 py-2"
+                    >
+                        Sign In
+                    </button>
+                )}
+                <div className="rounded-full overflow-hidden w-10 h-10">
+                    {/* <Image
+                        src={session?.user?.image || "/default-profile-pic.jpg"}
+                        alt="Profile"
+                        width={40}
+                        height={40}
+                        className="object-cover"
+                    /> */}
+                </div>
+            </div>
           {/* <SignedOut>
             <SignInButton mode="modal">
               <button className="bg-[#f3efe5] hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 border border-gray-800">
@@ -112,7 +159,7 @@ export default function Navbar() {
                 href="/announcement/all"
                 className="block text-gray-800 hover:text-black"
               >
-                Announcement
+                Notice
               </Link>
             </li>
             <li>
@@ -122,6 +169,38 @@ export default function Navbar() {
               >
                 Alert
               </Link>
+              <div className="flex items-center space-x-4">
+                {status === "loading" ? (
+                    <p></p>
+                ) : status === "authenticated" ? (
+                    <>
+                        <p className="text-gray-800 hover:text-black" >Welcome, {session.user.name || session.user.email}</p>
+                        <br></br>
+                        <button
+                            onClick={handleSignOut}
+                            className="bg-cream-3 px-4 py-2"
+                        >
+                            Sign Out
+                        </button>
+                    </>
+                ) : (
+                    <button
+                        onClick={handleSignIn}
+                        className="bg-cream-3 px-4 py-2"
+                    >
+                        Sign In
+                    </button>
+                )}
+                <div className="rounded-full overflow-hidden w-10 h-10">
+                    {/* <Image
+                        src={session?.user?.image || "/default-profile-pic.jpg"}
+                        alt="Profile"
+                        width={40}
+                        height={40}
+                        className="object-cover"
+                    /> */}
+                </div>
+            </div>
             </li>
           </ul>
         </div>

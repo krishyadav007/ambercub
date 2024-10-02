@@ -46,9 +46,9 @@ export async function GET(request, { params }) {
       },
     );
   } catch (error) {
-    console.error("Error fetching announcement:", error);
+    console.error("Error fetching notice:", error);
     return NextResponse.json(
-      { message: "Error fetching announcement" },
+      { message: "Error fetching notice" },
       { status: 500 },
     );
   }

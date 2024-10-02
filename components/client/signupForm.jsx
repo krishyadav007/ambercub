@@ -6,11 +6,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRouter } from 'next/navigation';
+import { useSession } from "next-auth/react";
 import { signInWithGoogle } from './actions';
 
 
 const signupForm = ({ onSignupSuccess }) => {
+    const router = useRouter()
 
+    const { data: session, status } = useSession();
+    if (session) {
+        router.push("/");
+    }
     const handleSubmit = async (formData) => {
         try {
             const result = await signup(formData);
@@ -50,7 +57,7 @@ const signupForm = ({ onSignupSuccess }) => {
                         </div>
                     </CardContent>
                     <CardFooter className="flex flex-col space-y-2">
-                        <Button className="w-full">Sign Up</Button>
+                        <Button className="w-full bg-cream-3">Sign Up</Button>
                     </CardFooter>
                 </Card>
             </form >

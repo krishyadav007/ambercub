@@ -10,7 +10,7 @@ const AllAnnouncements = () => {
   useEffect(() => {
     Swal.fire({
       title: "Loading...",
-      text: "Fetching Announcements",
+      text: "Fetching notices",
       icon: "info",
       allowOutsideClick: false,
       showConfirmButton: false,
@@ -38,11 +38,11 @@ const AllAnnouncements = () => {
         setAnnouncements(data.location || []);
         Swal.close();
       } catch (error) {
-        console.error("Error fetching announcements:", error);
-        setError("Failed to fetch announcements");
+        console.error("Error fetching notices:", error);
+        setError("Failed to fetch notices");
         Swal.fire({
           title: "Error",
-          text: "Failed to fetch Announcements",
+          text: "Failed to fetch notices",
           icon: "error",
         });
       }
@@ -62,7 +62,7 @@ const AllAnnouncements = () => {
               href={`/announcement/create`}
               className="block text-lg font-medium bg-cream-3 text-black px-4 py-2 hover:bg-[#f3efe9] text-center w-full sm:w-auto"
             >
-              Add Announcement
+              Add notices
             </Link>
           </div>
           {announcements.length > 0 ? (
@@ -72,7 +72,7 @@ const AllAnnouncements = () => {
                 className="p-4 sm:p-8 border border-black shadow-lg bg-[#F6EFE6]"
               >
                 <h1 className="text-3xl sm:text-4xl libre-baskerville-regular mb-2 text-center sm:text-left">
-                  Announcement
+                Notice
                 </h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
                   <div className="mb-4">
@@ -144,7 +144,7 @@ const AllAnnouncements = () => {
               </div>
             ))
           ) : (
-            <div>No announcements found.</div>
+            <div>No notices found.</div>
           )}
         </div>
       </div>

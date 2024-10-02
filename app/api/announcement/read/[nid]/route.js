@@ -47,7 +47,7 @@ export async function POST(request, { params }) {
 
     if (announcementRows.length === 0) {
       return NextResponse.json(
-        { message: "Announcement not found" },
+        { message: "Notice not found" },
         { status: 404 },
       );
     }
@@ -58,9 +58,9 @@ export async function POST(request, { params }) {
     });
     
   } catch (error) {
-    console.error("Error fetching announcement:", error);
+    console.error("Error fetching notice:", error);
     return NextResponse.json(
-      { message: "Error fetching announcement" },
+      { message: "Error fetching notice" },
       { status: 500 },
     );
   }

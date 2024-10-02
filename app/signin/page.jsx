@@ -20,8 +20,8 @@ export default function TabsDemo() {
     <div className="flex justify-center items-center h-screen">
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-[400px] h-[500px]">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="signup">Sign Up</TabsTrigger>
-          <TabsTrigger value="signin">Log In</TabsTrigger>
+          <TabsTrigger className="" value="signup">Sign Up</TabsTrigger>
+          <TabsTrigger className="" value="signin">Log In</TabsTrigger>
         </TabsList>
         <TabsContent value="signup">
           <SignupForm onSignupSuccess={() => handleTabChange("signin")} />

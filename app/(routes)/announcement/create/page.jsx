@@ -134,7 +134,7 @@ const AllPersons = () => {
       Swal.fire({
         icon: "success",
         title: "Success!",
-        text: "Announcement created successfully",
+        text: "Notice created successfully",
       });
       console.log(data);
     } catch (error) {
@@ -142,7 +142,7 @@ const AllPersons = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Announcement creation failed",
+        text: "Notice creation failed",
       });
     }
   };

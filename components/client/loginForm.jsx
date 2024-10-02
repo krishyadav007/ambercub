@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+// import { useRouter } from "@/next/navigation";
 import loginHandler from "@/actions/login"
 import { toast } from 'sonner'
 import { Button } from "@/components/ui/button";
@@ -14,18 +15,10 @@ import { useSession } from "next-auth/react";
 const LoginForm = () => {
     const router = useRouter()
 
-    const handleGoogleSignIn = async () => {
-        try {
-            await signIn('google', { callbackUrl: '/' });
-        } catch (error) {
-            toast.error("Failed to sign in with Google");
-        }
-    }
-
     const { data: session, status } = useSession();
-
-
-
+    if (session) {
+        router.push("/");
+    }
     return (
         <form action={async (FormData) => {
             const email = FormData.get("email");
@@ -34,8 +27,9 @@ const LoginForm = () => {
             const error = await loginHandler(FormData);
 
             if (!error) {
-                toast.success("Login successful");
-                router.push("/");
+                toast.error("Login successful");
+                router.refresh()
+                window.location.reload();
             } else {
                 toast.error(error);
             }
@@ -58,10 +52,7 @@ const LoginForm = () => {
                     </div>
                 </CardContent>
                 <CardFooter className="flex flex-col space-y-2">
-                    <Button className="w-full" type="submit">Log In</Button>
-                    {/* <Button variant="outline" className="w-full" type="button" onClick={handleGoogleSignIn}>
-                        Sign In with Google
-                    </Button> */}
+                    <Button className="w-full bg-cream-3" type="submit">Log In</Button>
                 </CardFooter>
             </Card>
         </form>
