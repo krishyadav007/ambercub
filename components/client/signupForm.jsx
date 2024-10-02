@@ -11,7 +11,7 @@ import { useSession } from "next-auth/react";
 import { signInWithGoogle } from './actions';
 
 
-const signupForm = ({ onSignupSuccess }) => {
+const SignupForm = ({ onSignupSuccess }) => {
     const router = useRouter()
 
     const { data: session, status } = useSession();
@@ -69,4 +69,4 @@ const signupForm = ({ onSignupSuccess }) => {
         </>)
 }
 
-export default signupForm
+export default SignupForm
