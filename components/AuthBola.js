@@ -17,7 +17,11 @@ export default function AuthBola() {
     return (<div>No redirect</div>
     );
   }
-  if (!(status === "authenticated")) {
+  if (status === "loading") {
+    console.log("Its loading")
+  }
+
+  if (status === "unauthenticated") {
       // router.push("/");
       router.push('/signin')
       // redirect('/signin')
