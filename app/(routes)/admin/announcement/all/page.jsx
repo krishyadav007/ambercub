@@ -5,18 +5,24 @@ import Link from "next/link";
 import Swal from "sweetalert2";
 
 const AllAnnouncements = () => {
-  const { data: session, status } = useSession();
-  const EmailId = session?.user?.email;
-  const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(";");
+      const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(";");
+    const { data: session, status } = useSession();
+    const EmailId = session?.user?.email;    
+    const [isAdmin, setIsAdmin] = useState(false);
 
-  const [isAdmin, setIsAdmin] = useState(false);
-  console.log(EmailId,ADMIN_EMAIL);
-  useEffect(() => {
-    if (EmailId) {
-      setIsAdmin(ADMIN_EMAIL.includes(EmailId));
+    useEffect(() => {
+        if (EmailId) {
+          setIsAdmin(ADMIN_EMAIL.includes(EmailId));
+        }
+    }, []);
+    
+    if (!isAdmin) {
+        return (
+            <div className="container mx-auto p-4">
+                Access denied. Admin privileges required.
+            </div>
+        );
     }
-  }, []);
-
   const [announcements, setAnnouncements] = useState([]);
   const [error, setError] = useState(null);
 
@@ -65,14 +71,6 @@ const AllAnnouncements = () => {
   }, []);
 
   if (error) return <div>Error: {error}</div>;
-
-  if (!isAdmin) {
-    return (
-      <div className="container mx-auto p-4">
-        Access denied. Admin privileges required.
-      </div>
-    );
-  }
 
   return (
     <>

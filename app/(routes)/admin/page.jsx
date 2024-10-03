@@ -7,13 +7,20 @@ export default function CreateTablesPage() {
     const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(";");
     const { data: session, status } = useSession();
     const EmailId = session?.user?.email;    
-    const [isAdmin, setIsAdmin] = useState(true);
-
+    const [isAdmin, setIsAdmin] = useState(false);
     useEffect(() => {
         if (EmailId) {
           setIsAdmin(ADMIN_EMAIL.includes(EmailId));
         }
     }, []);
+    
+    if (!isAdmin) {
+        return (
+            <div className="container mx-auto p-4">
+                Access denied. Admin privileges required.
+            </div>
+        );
+    }
 
     const [tables, setTables] = useState([
         { name: "Announcement", exists: false },
@@ -69,14 +76,6 @@ export default function CreateTablesPage() {
             console.error(`Error deleting ${tableName} table:`, error);
         }
     };
-
-    if (!isAdmin) {
-        return (
-            <div className="container mx-auto p-4">
-                Access denied. Admin privileges required.
-            </div>
-        );
-    }
 
     return (
         <>

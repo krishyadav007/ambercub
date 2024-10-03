@@ -43,9 +43,9 @@ export default function Navbar() {
           >
             Notices
           </Link>
-          <Link href="/alerts/all" className="text-gray-800 hover:text-black">
+          {/* <Link href="/alerts/all" className="text-gray-800 hover:text-black">
             Alert
-          </Link>
+          </Link> */}
           <div className="flex items-center space-x-4">
                 {status === "loading" ? (
                     <p></p>
