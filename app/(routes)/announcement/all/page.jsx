@@ -58,12 +58,12 @@ const AllAnnouncements = () => {
       <div className="flex flex-col items-center bg-cream-1 py-8 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-4xl space-y-8">
           <div className="mt-4">
-            {/* <Link
+            <Link
               href={`/announcement/create`}
               className="block text-lg font-medium bg-cream-3 text-black px-4 py-2 hover:bg-[#f3efe9] text-center w-full sm:w-auto"
             >
               Add notices
-            </Link> */}
+            </Link>
           </div>
           {announcements.length > 0 ? (
             announcements.map((announcement) => (
