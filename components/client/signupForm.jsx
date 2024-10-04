@@ -1,4 +1,5 @@
 "use client"
+import Swal from "sweetalert2";
 import React from 'react'
 import signup from "@/actions/signup"
 import { toast } from 'sonner'
@@ -22,10 +23,18 @@ const SignupForm = ({ onSignupSuccess }) => {
         try {
             const result = await signup(formData);
             if (result.success) {
-                toast.success("Registered successfully");
+                Swal.fire({
+                    title: "Registered successfully",
+                    text: "Please login to access the account",
+                    icon: "success"
+                });
                 onSignupSuccess();
             } else if (result.error) {
-                toast.error(result.error);
+                Swal.fire({
+                    title: "Registered fail",
+                    text: result.error,
+                    icon: "error"
+                });
             }
         } catch (error) {
             console.error(error);

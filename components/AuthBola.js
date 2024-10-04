@@ -13,10 +13,11 @@ export default function AuthBola() {
       console.log("Session data auth:", session);
   }, [session, status]);
   
-  if (window.location.pathname == "/signin") {
-    return (<div>No redirect</div>
-    );
-  }
+  // if (window.location.pathname == "/signin") {
+  //   return (<div>No redirect</div>
+  //   );
+  // }
+  
   if (status === "loading") {
     console.log("Its loading")
   }
