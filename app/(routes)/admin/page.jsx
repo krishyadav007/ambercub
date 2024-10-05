@@ -8,11 +8,11 @@ export default function CreateTablesPage() {
     const { data: session, status } = useSession();
     const EmailId = session?.user?.email;    
     const [isAdmin, setIsAdmin] = useState(false);
-    useEffect(() => {
-        if (EmailId) {
-          setIsAdmin(ADMIN_EMAIL.includes(EmailId));
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (EmailId) {
+    //       setIsAdmin(ADMIN_EMAIL.includes(EmailId));
+    //     }
+    // }, []);
     
     if (!isAdmin) {
         return (

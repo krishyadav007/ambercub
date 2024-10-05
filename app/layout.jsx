@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className="bg-cream-1">
           <Navbar />
-          <AuthBola />
+          {/* <AuthBola /> */}
           {loading ? <LoaderSkeleton /> : children}
         </body>
       </html>
