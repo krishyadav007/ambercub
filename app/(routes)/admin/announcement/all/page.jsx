@@ -1,32 +1,33 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Swal from "sweetalert2";
 
 const AllAnnouncements = () => {
-      const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(";");
-    const { data: session, status } = useSession();
-    // const EmailId = session?.user?.email;    
-    // const [isAdmin, setIsAdmin] = useState(false);
-
-    // useEffect(() => {
-    //     if (EmailId) {
-    //       setIsAdmin(ADMIN_EMAIL.includes(EmailId));
-    //     }
-    // }, []);
-    
-    if (!isAdmin) {
-        return (
-            <div className="container mx-auto p-4">
-                Access denied. Admin privileges required.
-            </div>
-        );
-    }
+  // Define all Hooks at the top, unconditionally
+  const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL
+    ? process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(";")
+    : [];
+  const { data: session, status } = useSession();
+  const EmailId = session?.user?.email;
+  const [isAdmin, setIsAdmin] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
   const [error, setError] = useState(null);
 
+  // Effect to determine if the user is an admin
   useEffect(() => {
+    if (EmailId) {
+      setIsAdmin(ADMIN_EMAIL.includes(EmailId));
+    }
+  }, [EmailId, ADMIN_EMAIL]);
+
+  // Effect to fetch announcements
+  useEffect(() => {
+    // Only fetch announcements if the user is an admin
+    if (!isAdmin) return;
+
     Swal.fire({
       title: "Loading...",
       text: "Fetching Announcements",
@@ -37,9 +38,9 @@ const AllAnnouncements = () => {
         Swal.showLoading();
       },
     });
+
     const fetchAnnouncements = async () => {
       try {
-        // setIsLoading(true);
         const response = await fetch("/api/admin/announcement/all", {
           method: "POST",
           headers: {
@@ -68,106 +69,121 @@ const AllAnnouncements = () => {
     };
 
     fetchAnnouncements();
-  }, []);
+  }, [isAdmin]);
+
+  // Conditional rendering after Hooks
+  if (status === "loading") {
+    return (
+      <div className="container mx-auto p-4">
+        Loading session...
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="container mx-auto p-4">
+        Access denied. Admin privileges required.
+      </div>
+    );
+  }
 
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <>
-      <div className="flex flex-col items-center bg-cream-1 py-8 px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-4xl space-y-8">
-          <div className="mt-4">
-            <Link
-              href={`/announcement/create`}
-              className="block text-lg font-medium bg-cream-3 text-black px-4 py-2 hover:bg-[#f3efe9] text-center w-full sm:w-auto"
+    <div className="flex flex-col items-center bg-cream-1 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-4xl space-y-8">
+        <div className="mt-4">
+          <Link
+            href={`/announcement/create`}
+            className="block text-lg font-medium bg-cream-3 text-black px-4 py-2 hover:bg-[#f3efe9] text-center w-full sm:w-auto"
+          >
+            Add notices
+          </Link>
+        </div>
+        {announcements.length > 0 ? (
+          announcements.map((announcement) => (
+            <div
+              key={announcement.aid}
+              className="p-4 sm:p-8 border border-black shadow-lg bg-[#F6EFE6]"
             >
-              Add notices
-            </Link>
-          </div>
-          {announcements.length > 0 ? (
-            announcements.map((announcement) => (
-              <div
-                key={announcement.aid}
-                className="p-4 sm:p-8 border border-black shadow-lg bg-[#F6EFE6]"
-              >
-                <h1 className="text-3xl sm:text-4xl libre-baskerville-regular mb-2 text-center sm:text-left">
-                  Announcement
-                </h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 ">
-                      Published medium
-                    </label>
-                    <input
-                      type="text"
-                      value={announcement.medium}
-                      readOnly
-                      className="w-full px-4 py-2 mt-1 border-b border-gray-300 focus:border-gray-400 focus:ring-0 outline-none"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Published Date
-                    </label>
-                    <input
-                      type="text"
-                      value={announcement.published_on}
-                      readOnly
-                      className="w-full px-4 py-2 mt-1 border-b border-gray-300 focus:border-gray-400 focus:ring-0 outline-none"
-                    />
-                  </div>
-                </div>
+              <h1 className="text-3xl sm:text-4xl libre-baskerville-regular mb-2 text-center sm:text-left">
+                Announcement
+              </h1>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Address
+                  <label className="block text-sm font-medium text-gray-700 ">
+                    Published medium
                   </label>
                   <input
                     type="text"
-                    value={announcement.location}
+                    value={announcement.medium}
+                    readOnly
+                    className="w-full px-4 py-2 mt-1 border-b border-gray-300 focus:border-gray-400 focus:ring-0 outline-none"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Published Date
+                  </label>
+                  <input
+                    type="text"
+                    value={announcement.published_on}
+                    readOnly
+                    className="w-full px-4 py-2 mt-1 border-b border-gray-300 focus:border-gray-400 focus:ring-0 outline-none"
+                  />
+                </div>
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Address
+                </label>
+                <input
+                  type="text"
+                  value={announcement.location}
+                  readOnly
+                  className="w-full px-4 py-2 mt-1 border-b border-gray-300 focus:border-gray-400 focus:ring-0 outline-none "
+                />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Latitude
+                  </label>
+                  <input
+                    type="text"
+                    value={announcement.lat}
+                    readOnly
+                    className="w-full px-4 py-2 mt-1 border-b border-gray-300 focus:border-gray-400 focus:ring-0 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Longitude
+                  </label>
+                  <input
+                    type="text"
+                    value={announcement.lon}
                     readOnly
                     className="w-full px-4 py-2 mt-1 border-b border-gray-300 focus:border-gray-400 focus:ring-0 outline-none "
                   />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Latitude
-                    </label>
-                    <input
-                      type="text"
-                      value={announcement.lat}
-                      readOnly
-                      className="w-full px-4 py-2 mt-1 border-b border-gray-300 focus:border-gray-400 focus:ring-0 outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Longitude
-                    </label>
-                    <input
-                      type="text"
-                      value={announcement.lon}
-                      readOnly
-                      className="w-full px-4 py-2 mt-1 border-b border-gray-300 focus:border-gray-400 focus:ring-0 outline-none "
-                    />
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <Link
-                    href={`/announcement/view/${announcement.nid}`}
-                    className="block text-sm font-medium bg-black text-white px-4 py-2 text-center w-full sm:w-auto"
-                  >
-                    View
-                  </Link>
-                </div>
               </div>
-            ))
-          ) : (
-            <div>No notices found.</div>
-          )}
-        </div>
+              <div className="mt-4">
+                <Link
+                  href={`/announcement/view/${announcement.nid}`}
+                  className="block text-sm font-medium bg-black text-white px-4 py-2 text-center w-full sm:w-auto"
+                >
+                  View
+                </Link>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div>No notices found.</div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
