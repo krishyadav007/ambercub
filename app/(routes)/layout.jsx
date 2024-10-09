@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 
 
 export default function RootLayout({ children }) {
-    // sdf = []
+    const guest_pages = ["/"]
     const { data: session, status } = useSession();
     const EmailId = session?.user?.email;
     const router = useRouter()
@@ -14,10 +14,10 @@ export default function RootLayout({ children }) {
 
 
   useEffect(() => {
-    if (status === "unauthenticated" && currentPage.includes("/")) {
+    if (status === "unauthenticated" && (!guest_pages.includes(currentPage))) {
         router.push('/signin')
     }
   }, [status]);
-  return status === "authenticated" ? ({...children}) : (<></>) 
+  return (status === "authenticated" || (guest_pages.includes(currentPage))) ? ({...children}) : (<></>) 
 //   return status === "authenticated" && ? ({children}) : (<></>) 
 }
