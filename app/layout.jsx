@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 import "./globals.css";
 import Navbar from "../components/Navbar";
-import AuthBola from "../components/AuthBola";
 import { useSession } from "next-auth/react";
 
 const LoaderSkeleton = () => {
@@ -36,7 +35,6 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className="bg-cream-1">
           <Navbar />
-          {/* <AuthBola /> */}
           {loading ? <LoaderSkeleton /> : children}
         </body>
       </html>
