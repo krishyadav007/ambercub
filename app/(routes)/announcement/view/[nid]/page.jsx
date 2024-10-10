@@ -100,14 +100,14 @@ const AllPersons = ({ params }) => {
             href={`/announcement/edit/${announcement.nid}`}
             className="w-full px-4 py-2 bg-green-500 text-white block text-center md:w-auto"
           >
-            Do you want to edit the announcement? Go ahead and edit one!
+            Head to edit announcement
           </Link>
         </div>
 
         <div className="max-w-7xl mx-auto px-4">
           <div className="mt-8">
             <h2 className="text-4xl mb-6 libre-baskerville-regular">
-              Announcement
+              Notice
             </h2>
 
             <div className="flex flex-col md:flex-row gap-8">

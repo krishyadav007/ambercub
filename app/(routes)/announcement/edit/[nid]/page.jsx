@@ -340,13 +340,13 @@ const AllPersons = ({ params }) => {
               href={`/announcement/validate/1/${nid}`}
               className="w-full px-4 py-2 bg-green-500 text-white block text-center md:w-auto "
             >
-              Do you want to Validate announcement? Go ahead and Validate 1!
+              Head to validation part 1 
             </Link>
           </div>
 
           <div className="mb-4">
             <h2 className="text-4xl mb-6 libre-baskerville-regular mb-2 text-center md:text-left">
-              Announcement
+              Notice
             </h2>
 
             <label className="block text-sm font-medium text-gray-700">

@@ -1,8 +1,9 @@
 "use client"
 import React from 'react'
-// import { useRouter } from "@/next/navigation";
+// import { useRouter } from "@/next/navigation"
+;
 import loginHandler from "@/actions/login"
-import { toast } from 'sonner'
+import Swal from "sweetalert2";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -27,11 +28,19 @@ const LoginForm = () => {
             const error = await loginHandler(FormData);
 
             if (!error) {
-                toast.error("Login successful");
+                Swal.fire({
+                    title: "Logged in successfully",
+                    text: "Refreshing the page",
+                    icon: "success"
+                });
                 router.refresh()
                 window.location.reload();
             } else {
-                toast.error(error);
+                Swal.fire({
+                    title: "Log in fail",
+                    text: error,
+                    icon: "error"
+                });
             }
         }}>
             <Card>

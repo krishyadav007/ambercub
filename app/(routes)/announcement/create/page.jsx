@@ -206,7 +206,7 @@ const AllPersons = () => {
         <div className="max-w-4xl w-full space-y-8 px-4 lg:px-0">
           <div className="mb-4">
             <h2 className="text-4xl mb-6 libre-baskerville-regular mb-2 text-center md:text-left">
-              Announcement
+              Notice
             </h2>
             <label className="block text-sm font-medium text-gray-700">
             Published medium

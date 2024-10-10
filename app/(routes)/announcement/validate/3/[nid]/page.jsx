@@ -60,13 +60,27 @@ const PersonAddressPage = ({ params }) => {
   return (
     <>
       <div className="bg-cream-1 min-h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-white shadow-md">
+        <Link
+          href={`/announcement/edit/${announcement.nid}`}
+          className="w-full px-4 py-2 bg-cream-3 text-white block text-center"
+        >
+          Edit
+        </Link>
+        <Link
+          href={`/announcement/validate/2/${nid}`}
+          className="w-full px-4 py-2 bg-green-500 text-white text-center hover:bg-green-600"
+        >
+          Validate 2
+        </Link>
+      </div>
         <div className="w-full py-4 px-8 bg-cream-1 text-center">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-white shadow-md">
             <Link
               href={`/announcement/edit/${announcement.nid}`}
               className="w-full px-4 py-2 bg-blue-500 text-white block text-center md:w-auto"
             >
-              edit
+              Edit
             </Link>
             <Link
               href={`alerts//announcement/${nid}`}
@@ -83,7 +97,7 @@ const PersonAddressPage = ({ params }) => {
               {/* Left Section - Individual Person */}
               <div className="w-1/2 p-4 bg-[#F0E4D7] border-r border-gray-300">
                 <div className="">
-                  <h2 className="text-2xl mb-6">(Person {index + 1})</h2>
+                  <h2 className="text-2xl mb-6">Person {index + 1}</h2>
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
                       First Name

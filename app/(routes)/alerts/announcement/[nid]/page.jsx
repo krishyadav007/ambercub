@@ -120,7 +120,7 @@ const AllPersons = ({ params }) => {
     <div className="bg-cream-1 py-8">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-4xl mb-6 libre-baskerville-regular">
-          Announcement
+          Notice
         </h2>
 
         <div className="flex">
@@ -150,7 +150,7 @@ const AllPersons = ({ params }) => {
               {showMore["announcement"] && (
                 <div className="mt-4">
                   <h4 className="text-xl mb-4">
-                    Person Details in Announcement
+                    Person Details in Notice
                   </h4>
                   {persons.apersons && Array.isArray(persons.apersons)
                     ? persons.apersons.map((person, personIndex) => (

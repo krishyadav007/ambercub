@@ -77,19 +77,18 @@ const AnnouncementPage = ({ params }) => {
           href={`/announcement/edit/${announcement.nid}`}
           className="w-full px-4 py-2 bg-cream-3 text-white block text-center"
         >
-          edit
+          Edit
         </Link>
         <Link
           href={`/announcement/validate/2/${nid}`}
           className="w-full px-4 py-2 bg-green-500 text-white text-center hover:bg-green-600"
         >
-          validate 2
+          Validate 2
         </Link>
       </div>
-
       <div className="flex flex-col md:flex-row flex-grow">
         <div className="w-full md:w-1/2 p-4 bg-[#F0E4D7]">
-          <h2 className="text-lg font-semibold mb-2">Announcement (text)</h2>
+          <h2 className="text-lg font-semibold mb-2">Notice (Text)</h2>
           <textarea
             value={announcement.text}
             readOnly={viewOnly}

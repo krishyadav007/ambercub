@@ -23,7 +23,7 @@ export default function CreateTablesPage() {
         { name: "Alerts", exists: false },
     ]);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true); // Optional: To handle loading states
+    const [loading, setLoading] = useState(true); // To handle loading states
 
     // 2. Effect to determine if the user is an admin
     useEffect(() => {
@@ -37,12 +37,12 @@ export default function CreateTablesPage() {
         } else {
             setIsAdmin(false);
         }
+
+        // Set loading to false after determining admin status
+        setLoading(false);
     }, [EmailId, ADMIN_EMAIL, status]);
 
-    // 3. Optional: Fetch existing table statuses if needed
-    // You can add another useEffect here if you need to fetch initial table states
-
-    // 4. Handle loading state
+    // 3. Handle loading state
     if (status === "loading" || loading) {
         return (
             <div className="container mx-auto p-4">
@@ -51,7 +51,7 @@ export default function CreateTablesPage() {
         );
     }
 
-    // 5. Conditional rendering after all Hooks
+    // 4. Conditional rendering after all Hooks
     if (!isAdmin) {
         return (
             <div className="container mx-auto p-4">
@@ -60,7 +60,7 @@ export default function CreateTablesPage() {
         );
     }
 
-    // 6. Define functions for creating and deleting tables
+    // 5. Define functions for creating and deleting tables
     const createTable = async (tableName) => {
         try {
             const response = await fetch(
@@ -135,7 +135,7 @@ export default function CreateTablesPage() {
         }
     };
 
-    // 7. Render the component
+    // 6. Render the component
     return (
         <>
             <div className="container mx-auto p-4">

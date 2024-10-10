@@ -30,7 +30,7 @@ const AllAnnouncements = () => {
 
     Swal.fire({
       title: "Loading...",
-      text: "Fetching Announcements",
+      text: "Fetching Notices",
       icon: "info",
       allowOutsideClick: false,
       showConfirmButton: false,
@@ -58,11 +58,11 @@ const AllAnnouncements = () => {
         setAnnouncements(data.location || []);
         Swal.close();
       } catch (error) {
-        console.error("Error fetching announcements:", error);
-        setError("Failed to fetch announcements");
+        console.error("Error fetching notices:", error);
+        setError("Failed to fetch notices");
         Swal.fire({
           title: "Error",
-          text: "Failed to fetch Announcements",
+          text: "Failed to fetch notices",
           icon: "error",
         });
       }
@@ -108,7 +108,7 @@ const AllAnnouncements = () => {
               className="p-4 sm:p-8 border border-black shadow-lg bg-[#F6EFE6]"
             >
               <h1 className="text-3xl sm:text-4xl libre-baskerville-regular mb-2 text-center sm:text-left">
-                Announcement
+                Notice
               </h1>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
                 <div className="mb-4">

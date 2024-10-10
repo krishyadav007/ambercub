@@ -3,7 +3,6 @@ import { auth } from "@/auth"
 
 export async function middleware(request) {
     const session = await auth();
-    console.log(session)
   if (request.nextUrl.pathname.startsWith('/api')) {
     if(!(session !== null)) {
         return new Response(JSON.stringify({ message: "You are not authorized to view this " }), {

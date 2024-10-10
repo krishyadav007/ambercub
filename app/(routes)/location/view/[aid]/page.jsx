@@ -74,7 +74,7 @@ const DynamicPersonForm = ({ params }) => {
             href={`/location/edit/${nid}`}
             className="px-4 py-2 bg-green-500 text-white text-center sm:text-left w-full sm:w-auto"
           >
-            Do you want to edit location? Go ahead and edit!
+            Head to edit location 
           </Link>
         </div>
 

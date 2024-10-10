@@ -78,19 +78,19 @@ const AddressPage = ({ params }) => {
               href={`/announcement/edit/${announcement.nid}`}
               className="w-full px-4 py-2 bg-cream-3 text-white block text-center md:w-auto"
             >
-              edit
+              Edit
             </Link>
             <Link
               href={`/announcement/validate/3/${nid}`}
               className="w-full px-4 py-2 bg-green-500 text-white text-center  hover:bg-green-600"
             >
-              validate 3
+              Validate 3
             </Link>
           </div>
         </div>
         <div className="flex flex-col md:flex-row">
           <div className="w-full md:w-1/2 p-4 bg-[#F0E4D7] border-r border-gray-300">
-            <h2 className="text-2xl mb-6">(Address)</h2>
+            <h2 className="text-2xl mb-6">Address</h2>
             {/* <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
                 Published medium
