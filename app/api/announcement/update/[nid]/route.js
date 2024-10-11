@@ -21,9 +21,7 @@ export async function PUT(request, { params }) {
 
     const base64Image = formData.get("file");
     const medium = formData.get("medium");
-    const published_on = new Date(formData.get("publishedDate"))
-      .toISOString()
-      .split("T")[0];
+    const published_on = new Date(formData.get("publishedDate"));
     const { text } = JSON.parse(formData.get("announcement"));
     const location = formData.get("address");
     const lat = formData.get("latitude");
@@ -41,8 +39,8 @@ export async function PUT(request, { params }) {
     }
     const persons = JSON.parse(formData.get("persons"));
     const added_by = userId;
-    const last_validated = new Date().toISOString().split("T")[0];
-    console.log(base64Image);
+    const last_validated = formData.get("publishedDate");
+
     let img_sql = "";
     if (base64Image) {
       img_sql = `img_path='` + base64Image + `',`;
@@ -59,7 +57,7 @@ export async function PUT(request, { params }) {
         lat: lat,
         lon: lon,
         added_by: added_by,
-        last_validated: last_validated,
+        last_validated: new Date(published_on),
       },
     });
     const personRows = await db.ninst.findMany({
