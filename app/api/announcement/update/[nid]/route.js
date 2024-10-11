@@ -43,6 +43,7 @@ export async function PUT(request, { params }) {
 
     let img_sql = "";
     if (base64Image) {
+      console.log("notice image",base64Image);
       img_sql = `img_path='` + base64Image + `',`;
     }
     await db.announcement.update({

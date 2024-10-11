@@ -3,6 +3,7 @@ import { db } from '../../../../../lib/db';
 
 export async function DELETE(request) {
   try {
+    const { attribute, originalAttribute } = await request.json();
     const result = await db.attribute.deleteMany({
       where: {
         attribute: attribute,

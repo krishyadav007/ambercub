@@ -3,6 +3,12 @@ import { db } from '../../../../../lib/db';
 
 export async function DELETE(request) {
   try {
+    const { attribute, originalAttribute } = await request.json();
+    const result = await db.attribute.deleteMany({
+      where: {
+        attribute: attribute,
+      }
+    });
     // const connection = await mysql.createConnection({
     //   host: process.env.NEXT_PUBLIC_HOST, //DB_HOST,
     //   user: process.env.NEXT_PUBLIC_USER, //DB_USER,
@@ -10,16 +16,11 @@ export async function DELETE(request) {
     //   database: process.env.NEXT_PUBLIC_DB_NAME, // DB_NAME
     // });
 
-    const { attribute } = await request.json();
-    // const DeleteQuery = `DELETE FROM attribute WHERE attribute = ? AND type = 'announcement'`;
-      const result = await db.attribute.deleteMany({
-        where: {
-          attribute: attribute,  // Replace with the variable or value you want to match
-        }
-      });    
+    // const { attribute } = await request.json();
+    // const DeleteQuery = `DELETE FROM attribute WHERE attribute = ? AND type = 'location'`;
+
     // await connection.query(DeleteQuery, [attribute]);
     // await connection.end();
-
     return new Response(
       JSON.stringify({ message: "Attribute deleted successfully" }),
       {
