@@ -42,16 +42,17 @@ export async function PUT(request, { params }) {
     const last_validated = formData.get("publishedDate");
 
     let img_sql = "";
-    if (base64Image) {
+    console.log(base64Image.length);
+    if (base64Image.length) {
       console.log("notice image",base64Image);
-      img_sql = `img_path='` + base64Image + `',`;
+      img_sql = base64Image;
     }
     await db.announcement.update({
       where: { nid: nid },
       data: {
         medium: medium,
         published_on: published_on,
-        img_path: img_sql, // assuming `img_sql` is a direct path or binary
+        img_path: base64Image, // assuming `img_sql` is a direct path or binary
         text: text,
         details: details,
         location: location,
