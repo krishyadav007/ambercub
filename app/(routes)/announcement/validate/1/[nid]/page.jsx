@@ -6,7 +6,7 @@ import Zoomist from "zoomist";
 
 const AnnouncementPage = ({ params }) => {
   const [announcement, setAnnouncement] = useState({
-    text: "This is the notice text.",
+    text: "Notice text is loading, please wait",
   });
   const nid = params.nid;
   const [previewUrl, setPreviewUrl] = useState(null);

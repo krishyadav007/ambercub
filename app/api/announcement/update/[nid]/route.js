@@ -43,7 +43,7 @@ export async function PUT(request, { params }) {
 
     let img_sql = "";
     console.log(base64Image.length);
-    if (base64Image.length) {
+    if (base64Image != null ) {
       console.log("notice image",base64Image);
       img_sql = base64Image;
     }
