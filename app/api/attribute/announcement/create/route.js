@@ -15,6 +15,7 @@ export async function POST(request) {
     const result = await db.attribute.create({
       data: {
         attribute: attribute,
+        type: "location" // TO REMOVE
       }
     });
 

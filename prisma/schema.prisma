@@ -83,7 +83,6 @@ model Announcement {
 model Attribute {
   id        Int    @id @default(autoincrement())
   attribute String
-  type      String
 }
 
 model Location {

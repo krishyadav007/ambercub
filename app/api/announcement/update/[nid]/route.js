@@ -1,5 +1,6 @@
 // import mysql from "mysql2/promise";
 import { auth } from "@/auth"
+import { db } from '../../../../../lib/db';
 
 export async function PUT(request, { params }) {
   const nid = params.nid;
