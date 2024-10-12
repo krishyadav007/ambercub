@@ -5,12 +5,12 @@ export async function POST(request) {
   try {
     const { attribute } = await request.json();
 
-    // const connection = await mysql.createConnection({
-    //   host: process.env.NEXT_PUBLIC_HOST, //DB_HOST,
-    //   user: process.env.NEXT_PUBLIC_USER, //DB_USER,
-    //   password: process.env.NEXT_PUBLIC_PASSWORD, // DB_PASSWORD,
-    //   database: process.env.NEXT_PUBLIC_DB_NAME, // DB_NAME
-    // });
+    const connection = await mysql.createConnection({
+      host: process.env.NEXT_PUBLIC_HOST, //DB_HOST,
+      user: process.env.NEXT_PUBLIC_USER, //DB_USER,
+      password: process.env.NEXT_PUBLIC_PASSWORD, // DB_PASSWORD,
+      database: process.env.NEXT_PUBLIC_DB_NAME, // DB_NAME
+    });
 
     const result = await db.attribute.create({
       data: {
