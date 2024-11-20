@@ -1,8 +1,10 @@
 // Read
-import { db } from '../../../../../lib/db';
+import { db } from '../../../../../../../lib/db';
 import { auth } from "@/auth"
 
 export async function GET(req, { params }) {
+  const aid = params.aid;
+  const Status = params.Status;
   const session = await auth();
   const EmailId = session?.user?.email;
   const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL.split(";");
@@ -26,16 +28,33 @@ export async function GET(req, { params }) {
     //   password: process.env.NEXT_PUBLIC_PASSWORD, // DB_PASSWORD,
     //   database: process.env.NEXT_PUBLIC_DB_NAME, // DB_NAME
     // });
-    const response_locations = await db.location.findMany();
+    let response_locations = []
+    if (Status === "active") {
+      response_locations = await db.location.update({
+        where: { 
+          aid: aid // Ensure `aid` is unique in your schema
+        },
+        data: {
+          Status: "inactive",
+        },
+      });
+    } else if (Status === "inactive") {
+      response_locations = await db.location.update({
+        where: { 
+          aid: aid // Ensure `aid` is unique in your schema
+        },
+        data: {
+          Status: "active",
+        },
+      });
+    }
     // const AllLocationQuery = `SELECT * FROM location`;
     // let response_locations = await connection.query(AllLocationQuery);
 
     // await connection.end();
 
     return new Response(
-      JSON.stringify({
-        location: response_locations,
-      }),
+      JSON.stringify({"Updated":"Status updated successfully"}),
       {
         status: 200,
         headers: {

@@ -87,7 +87,8 @@ model Attribute {
 
 model Location {
   id       Int     @id @default(autoincrement())
-  aid      String
+  aid      String  @unique
+  Status   String  @default("deactivate")
   address  String  @db.LongText
   details  String  @db.LongText
   lat      Decimal @db.Decimal(10, 8)

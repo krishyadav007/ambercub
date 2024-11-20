@@ -62,9 +62,18 @@ const AllPersons = () => {
               key={person.id}
               className="p-4 sm:p-8 border border-black shadow-lg bg-[#F6EFE6]"
             >
-              <h1 className="text-3xl sm:text-4xl libre-baskerville-regular mb-2 text-center sm:text-left">
-                Location
-              </h1>
+              <div className="flex justify-between">
+                <h1 className="text-3xl sm:text-4xl libre-baskerville-regular mb-2 text-center sm:text-left">
+                  Location
+                </h1>
+                  <button
+                  className={`px-4 py-2 text-right capitalize ${
+                    person.Status === "active" ? "bg-cream-3" : "bg-black text-white"
+                  }`}
+                >
+                  {person.Status}
+                </button>
+              </div>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">
                   Address

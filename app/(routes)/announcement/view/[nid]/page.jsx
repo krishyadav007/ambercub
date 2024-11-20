@@ -115,7 +115,7 @@ const AllPersons = ({ params }) => {
               <div className="w-full md:w-1/2">
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700">
-                  Published medium
+                  Newspaper
                   </label>
                   <textarea
                     name="text"

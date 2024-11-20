@@ -350,7 +350,7 @@ const AllPersons = ({ params }) => {
             </h2>
 
             <label className="block text-sm font-medium text-gray-700">
-            Published medium
+            Newspaper
             </label>
             <input
               type="text"
