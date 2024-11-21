@@ -5,27 +5,33 @@ export default function HeroSection() {
   return (
     <>
       {/* Hero Section */}
-      <section className="flex flex-col-reverse lg:flex-row items-center bg-cream-1 p-8 lg:p-16 space-y-8 lg:space-y-0 lg:space-x-8">
-        <div className="lg:w-1/2 space-y-6 text-center lg:text-left">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-800 libre-baskerville-regular">
-            Notice Boy
+      <section className="relative h-screen">
+        {/* Background Image */}
+        <div className="absolute inset-0 h-full w-full z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1433574466251-fe1be0d9b3d2?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Background Image"
+            layout="fill"
+            objectFit="cover"
+            className="object-cover"
+          />
+        </div>
+
+        {/* Text Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-8">
+          <h1 className="text-4xl md:text-6xl font-bold libre-baskerville-regular">
+            Noticeboy
           </h1>
-          <p className="text-lg md:text-xl text-gray-700">
-            Safeguard your property with real-time alerts for legal notices, title updates, and encroachments. Notice Boy keeps you informed, so you stay secure.
+          <p className="text-lg md:text-xl mt-4 max-w-3xl">
+            Safeguard your property with real-time alerts for legal notices, title updates, and encroachments. Stay informed, stay secure.
           </p>
-          <button className="px-6 py-3 text-lg font-semibold text-white bg-green-600 hover:bg-green-700">
+          <button className="mt-6 px-6 py-3 text-lg font-semibold bg-green-600 hover:bg-green-700 rounded shadow-md">
             Get Started
           </button>
         </div>
-        <div className="lg:w-1/2">
-          <Image
-            src="https://images.unsplash.com/photo-1591012911205-f24e970e12a9?w=1471&auto=format&fit=crop&q=80"
-            alt="Secure Property"
-            width={600}
-            height={400}
-            className="rounded-lg shadow-lg max-w-full h-auto"
-          />
-        </div>
+
+        {/* Optional Overlay for Better Readability */}
+        <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
       </section>
 
       {/* Features Section */}
